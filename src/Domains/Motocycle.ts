@@ -6,8 +6,8 @@ class MotoCicle {
   protected color: string;
   protected status: boolean | undefined;
   protected buyValue: number;
-  protected category: string;
-  protected engineCapacity: number;
+  private category: string;
+  private engineCapacity: number;
   constructor(motoCicle: IMotocicle) {
     this.model = motoCicle.model;
     this.year = motoCicle.year;
