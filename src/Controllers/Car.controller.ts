@@ -24,6 +24,17 @@ class CarController {
       res.status(error.status).json({ message: error.message });
     }
   };
+
+  getCarByIdAndUpdate = async (req: Request, res:Response) => {
+    try {
+      const { id } = req.params;
+      const newCarInfo = req.body;
+      const result = await this.service.updateCarById(id, newCarInfo);
+      res.status(200).send(result);
+    } catch (error:any) {
+      res.status(error.status).json({ message: error.message });
+    }
+  };
 }
 
 export default CarController;

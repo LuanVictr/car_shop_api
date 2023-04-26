@@ -23,9 +23,9 @@ class VehicleODM<T> {
     return this.model.find({ _id: id });
   }
 
-  public async findByIdAndUpdate(id:number, vehicle: Partial<T>):Promise<T | null> {
+  public async findByIdAndUpdate(id:string, vehicle: Partial<T>):Promise<T | null> {
     return this.model.findByIdAndUpdate(
-      { id },
+      { _id: id },
       { ...vehicle } as UpdateQuery<T>,
       { new: true },
     );

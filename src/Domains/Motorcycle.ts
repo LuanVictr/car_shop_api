@@ -1,4 +1,4 @@
-import IMotocicle from '../Interfaces/IMotocicle';
+import IMotocicle from '../Interfaces/IMotorcycle';
 
 class MotoCicle {
   protected model: string;

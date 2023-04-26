@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 import VehicleODM from './VehicleODM';
-import IMotocicle from '../Interfaces/IMotocicle';
+import IMotocicle from '../Interfaces/IMotorcycle';
 
 class MotocycleODM extends VehicleODM<IMotocicle> {
   constructor() {

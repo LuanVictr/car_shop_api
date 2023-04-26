@@ -3,9 +3,17 @@ import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
 
 class CarServices {
-  /*  static createDomainCar(car:ICar) {
-    const
-  } */
+  static async checkId(id:string) {
+    const carODM = new CarODM();
+    const isValid = isValidObjectId(id);
+    if (!isValid) {
+      throw Object.assign(new Error('Invalid mongo id'), { status: 422 });
+    }
+    const carWithoudId = await carODM.findById(id);
+    if (carWithoudId.length === 0) {
+      throw Object.assign(new Error('Car not found'), { status: 404 });
+    }
+  }
 
   async createCar(car: ICar) {
     const carODM = new CarODM();
@@ -52,14 +60,8 @@ class CarServices {
 
   async getCarById(id:string) {
     const carODM = new CarODM();
-    const isValid = isValidObjectId(id);
-    if (!isValid) {
-      throw Object.assign(new Error('Invalid mongo id'), { status: 422 });
-    }
+    await CarServices.checkId(id);
     const carWithoudId = await carODM.findById(id);
-    if (carWithoudId.length === 0) {
-      throw Object.assign(new Error('Car not found'), { status: 404 });
-    }
     const [carWithId] = carWithoudId.map((cars) => ({
       id: cars.id,
       model: cars.model,
@@ -71,6 +73,25 @@ class CarServices {
       seatsQty: cars.seatsQty,
     }));
     return carWithId;
+  }
+
+  async updateCarById(id:string, newCarInfo:ICar) {
+    const carODM = new CarODM();
+    await CarServices.checkId(id);
+    const carUpdated = await carODM.findByIdAndUpdate(id, newCarInfo);
+    if (carUpdated) {
+      return {
+        id: carUpdated.id,
+        model: carUpdated.model,
+        year: carUpdated.year,
+        color: carUpdated.color,
+        status: carUpdated.status,
+        buyValue: carUpdated.buyValue,
+        doorsQty: carUpdated.doorsQty,
+        seatsQty: carUpdated.seatsQty,
+      };
+    } 
+    return null;
   }
 }
 
