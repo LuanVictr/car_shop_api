@@ -1,61 +1,13 @@
 import IMotocicle from '../Interfaces/IMotorcycle';
+import Vehicle from './Vehicle';
 
-class MotoCicle {
-  protected model: string;
-  protected year: number;
-  protected color: string;
-  protected status: boolean | undefined;
-  protected buyValue: number;
+class MotoCicle extends Vehicle {
   private category: string;
   private engineCapacity: number;
   constructor(motoCicle: IMotocicle) {
-    this.model = motoCicle.model;
-    this.year = motoCicle.year;
-    this.color = motoCicle.color;
-    this.status = motoCicle.status;
-    this.buyValue = motoCicle.buyValue;
+    super(motoCicle);
     this.category = motoCicle.category;
     this.engineCapacity = motoCicle.engineCapacity;
-  }
-  
-  getModel() {
-    return this.model;
-  }
-  
-  setModel(value:string) {
-    this.model = value;
-  }
-    
-  getYear() {
-    return this.year;
-  }
-  
-  setYear(value:number) {
-    this.year = value;
-  }
-  
-  getColor() {
-    return this.color;
-  }
-  
-  setColor(value:string) {
-    this.color = value;
-  }
-  
-  getStatus() {
-    return this.status;
-  }
-  
-  setStatus(value:boolean) {
-    this.status = value;
-  }
-  
-  getBuyValue() {
-    return this.buyValue;
-  }
-  
-  setBuyValue(value:number) {
-    this.buyValue = value;
   }
   
   getCategory() {

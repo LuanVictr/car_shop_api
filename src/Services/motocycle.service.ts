@@ -34,7 +34,28 @@ class MotocycleService {
   async createMotocycle(motocycle:IMotocicle) {
     const motocyclesODM = new MotocycleODM();
     const result = await motocyclesODM.create(motocycle);
-    return result;
+    if (!motocycle.status) {
+      return {
+        id: result.id,
+        model: result.model,
+        year: result.year,
+        color: result.color,
+        status: false,
+        buyValue: result.buyValue,
+        category: result.category,
+        engineCapacity: result.engineCapacity,
+      };
+    }
+    return {
+      id: result.id,
+      model: result.model,
+      year: result.year,
+      color: result.color,
+      status: result.status,
+      buyValue: result.buyValue,
+      category: result.category,
+      engineCapacity: result.engineCapacity,
+    };
   }
 
   async getMotocycleById(id:string) {
