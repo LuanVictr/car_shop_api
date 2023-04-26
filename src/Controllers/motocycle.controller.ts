@@ -15,8 +15,18 @@ class MotocycleController {
   };
 
   getAllMotorcycles = async (_req: Request, res: Response) => {
-    const result = this.services.getAllMotocicles();
+    const result = await this.services.getAllMotocicles();
     res.status(200).send(result);
+  };
+
+  getMotocycleById = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const result = await this.services.getMotocycleById(id);
+      res.status(200).send(result);
+    } catch (error:any) {
+      res.status(error.status).json({ message: error.message });
+    }
   };
 }
 

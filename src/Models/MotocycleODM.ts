@@ -13,7 +13,7 @@ class MotocycleODM extends VehicleODM<IMotocicle> {
       category: { type: String, required: true },
       engineCapacity: { type: Number, required: true },
     }, { versionKey: false });
-    super(schema, 'motocycles');
+    super(schema, 'motorcycles');
   }
 }
 
