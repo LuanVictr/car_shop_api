@@ -1,7 +1,7 @@
 import IMotocicle from '../Interfaces/IMotorcycle';
 import Vehicle from './Vehicle';
 
-class MotoCicle extends Vehicle {
+class Motorcycle extends Vehicle {
   private category: string;
   private engineCapacity: number;
   constructor(motoCicle: IMotocicle) {
@@ -27,4 +27,4 @@ class MotoCicle extends Vehicle {
   }
 }
   
-export default MotoCicle;
+export default Motorcycle;

@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import Sinon from 'sinon';
 import { Model } from 'mongoose';
 import MotocycleService from '../../../src/Services/motocycle.service';
+import Motorcycle from '../../../src/Domains/Motorcycle';
 
 describe('testa a camada service motos', function () {
   const motoName = 'Honda cb 600f Hornet';
@@ -55,8 +56,8 @@ describe('testa a camada service motos', function () {
       expect((error as Error).message).to.be.equal('Invalid mongo id');
     }
   });
-  it('deve ser impossivel buscar uma moto que não existe', async function () {
-    /* const motoOutput = {
+  it('Deve ser possivel buscar todas as motos com sucesso', async function () {
+    const motoOutput = new Motorcycle({
       id: '6348513f34c397abcad040b2',
       model: motoName,
       year: 2005,
@@ -65,14 +66,10 @@ describe('testa a camada service motos', function () {
       buyValue: 30000,
       category: 'Street',
       engineCapacity: 600,
-    }; */
-    Sinon.stub(Model, 'findById').resolves([]);
-    try {
-      const service = new MotocycleService();
-      const result = await service.getMotocycleById('1111222233330000ffffcccc');
-      expect(result).to.be.deep.equal({ message: 'Motorcycle not found' });
-    } catch (error) {
-      expect((error as Error).message).to.be.equal('Motorcycle not found');
-    }
+    });
+    Sinon.stub(Model, 'find').resolves([motoOutput]);
+    const service = new MotocycleService();
+    const result = await service.getAllMotocicles();
+    expect(result).to.be.deep.equal([motoOutput]);
   });
 });
