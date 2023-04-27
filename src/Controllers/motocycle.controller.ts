@@ -28,6 +28,17 @@ class MotocycleController {
       res.status(error.status).json({ message: error.message });
     }
   };
+
+  updateMotorcycleById = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const newInfo = req.body;
+      const result = await this.services.getMotorcycleByIdAndUpdate(id, newInfo);
+      res.status(200).send(result);
+    } catch (error:any) {
+      res.status(error.status).json({ message: error.message });
+    }
+  };
 }
 
 export default MotocycleController;

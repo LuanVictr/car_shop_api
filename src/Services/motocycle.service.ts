@@ -74,6 +74,24 @@ class MotocycleService {
     }));
     return motocycleWithId;
   }
+
+  async getMotorcycleByIdAndUpdate(id:string, newInfo: IMotocicle) {
+    const motorcycleODM = new MotocycleODM();
+    await MotocycleService.checkId(id);
+    const result = await motorcycleODM.findByIdAndUpdate(id, newInfo);
+    if (result) {
+      return {
+        id: result.id,
+        model: result.model,
+        year: result.year,
+        color: result.color,
+        status: result.status,
+        buyValue: result.buyValue,
+        category: result.category,
+        engineCapacity: result.engineCapacity,
+      };
+    }
+  }
 }
 
 export default MotocycleService;
